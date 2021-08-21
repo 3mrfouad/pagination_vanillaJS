@@ -21,18 +21,26 @@ if (!offset) {
 
 next.addEventListener('click', (e) => {
     e.preventDefault();
-    range.forEach(item => listItems[(itemsPerPage * offset) + item].classList.add('hide'));
+    hideCurrentItems();
     offset++; currentPage++;
-    range.forEach(item => listItems[(itemsPerPage * offset) + item].classList.remove('hide'));
+    showNextItems();
     currentPage >= pagesCount ? next.classList.add('isDisabled') : previous.classList.remove('isDisabled')
 });
 
 previous.addEventListener('click', (e) => {
     e.preventDefault();
-    range.forEach(item => listItems[(itemsPerPage * offset) + item].classList.add('hide'));
+    hideCurrentItems();
     offset--; currentPage--;
-    range.forEach(item => listItems[(itemsPerPage * offset) + item].classList.remove('hide'));
+    showNextItems();
     currentPage <= 1 ? previous.classList.add('isDisabled') : next.classList.remove('isDisabled');
 });
 
+
+function showNextItems() {
+    range.forEach(item => listItems[(itemsPerPage * offset) + item].classList.remove('hide'));
+}
+
+function hideCurrentItems() {
+    range.forEach(item => listItems[(itemsPerPage * offset) + item].classList.add('hide'));
+}
 
